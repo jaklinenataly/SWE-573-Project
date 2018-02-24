@@ -1,4 +1,4 @@
-# BlooderHood-App
+# blooderhood-app
 
 SWE 573-Software Development Practise is taught by Dr.Suzan Üsküdarlı at Bogazici University.
 
