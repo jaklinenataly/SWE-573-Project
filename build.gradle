@@ -16,7 +16,9 @@ apply plugin: 'org.springframework.boot'
 
 group = 'com.vakses'
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
@@ -26,6 +28,8 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('org.postgresql:postgresql')
+    compile("org.springframework.social:spring-social-twitter")
+    compile('org.projectlombok:lombok:1.16.20')
+    runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
