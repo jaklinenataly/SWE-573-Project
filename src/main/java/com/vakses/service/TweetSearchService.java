@@ -15,17 +15,19 @@ import java.util.Set;
 @Service
 public class TweetSearchService {
     private Twitter twitter;
-    private TweetParserService tweetParserService;
+    private DonationStoreService tweetParserService;
+    private DonationRetweetService donationRetweetService;
 
     @Autowired
-    public TweetSearchService(Twitter twitter, TweetParserService tweetParserService) {
+    public TweetSearchService(Twitter twitter, DonationStoreService tweetParserService, DonationRetweetService donationRetweetService) {
         this.twitter = twitter;
         this.tweetParserService = tweetParserService;
+        this.donationRetweetService = donationRetweetService;
     }
 
     public void findTweets() {
-        long start = System.currentTimeMillis();
-        Set<Tweet> tweetSet = new HashSet<>();
+        final Set<Tweet> tweetSet = new HashSet<>();
+        final Set<Tweet> storedSet = new HashSet<>();
 
         twitter.searchOperations().search(generateSearchParameters()).getTweets()
                 .stream()
@@ -37,12 +39,14 @@ public class TweetSearchService {
                     }
                 });
 
-        System.out.println("Search operation took : " + (System.currentTimeMillis() - start) + "ms");
-        System.out.println("Total number of tweets: " + tweetSet.size());
-
         for (Tweet tweet : tweetSet) {
-            tweetParserService.parse(tweet);
+            boolean isStored = tweetParserService.parseAndStore(tweet);
+            if (isStored) {
+                storedSet.add(tweet);
+            }
         }
+
+        donationRetweetService.retweet(tweetSet);
     }
 
     private SearchParameters generateSearchParameters() {
