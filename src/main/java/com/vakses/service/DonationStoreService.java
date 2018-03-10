@@ -4,6 +4,7 @@ import com.vakses.model.data.BloodGroup;
 import com.vakses.model.data.Hospitals;
 import com.vakses.model.entity.DonationEntity;
 import com.vakses.repository.DonationRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Service;
@@ -11,24 +12,26 @@ import org.springframework.stereotype.Service;
 /**
  * Created by veraxmedax on 08/03/2018.
  */
+@Slf4j
 @Service
-public class TweetParserService {
+public class DonationStoreService {
     private BloodGroup bloodGroup;
     private Hospitals hospitals;
     private DonationRepository donationRepository;
 
     @Autowired
-    public TweetParserService(BloodGroup bloodGroup, Hospitals hospitals, DonationRepository donationRepository) {
+    public DonationStoreService(BloodGroup bloodGroup, Hospitals hospitals, DonationRepository donationRepository) {
         this.bloodGroup = bloodGroup;
         this.hospitals = hospitals;
         this.donationRepository = donationRepository;
     }
 
-    public void parse(Tweet tweet) {
+    public boolean parseAndStore(Tweet tweet) {
         DonationEntity storedEntity = donationRepository.findByTweetId(tweet.getId());
 
         if (storedEntity != null) {
-            return;
+            log.info("Donation with tweetId: {} is already existed.", tweet.getId());
+            return false;
         }
 
         DonationEntity donationEntity = new DonationEntity();
@@ -56,6 +59,10 @@ public class TweetParserService {
             donationEntity.setContact(tweet.getUser().getScreenName());
             donationEntity.setTweetId(tweet.getId());
             donationRepository.save(donationEntity);
+            log.info("Donation with id: {} and tweet id: {} stored successfully.",
+                    donationEntity.getId(), donationEntity.getTweetId());
+            return true;
         }
+        return false;
     }
 }

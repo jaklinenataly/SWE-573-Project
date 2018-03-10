@@ -24,11 +24,13 @@ public class Hospitals {
         map.put("SÖĞÜTÖZÜ MEDİCANA HASTANESİ", "ANKARA");
         map.put("SİNCAN LOKMAN HEKİM HASTANESİ", "ANKARA");
 
-        map.put("ULUDAĞ TIP FAKÜLTESİ", "BURSA");
+        map.put("ULUDAĞ FAKÜLTESİ", "BURSA");
+        map.put("ULUDAĞ ÜNİVERSİTESİ", "BURSA");
 
         map.put("MEHMET AKİF Hastanesi", "İSTANBUL");
         map.put("ÜSKÜDAR ÇAMLICA HASTANESİ", "İSTANBUL");
         map.put("ÇAPA TIP FAKÜLTESİ", "İSTANBUL");
+        map.put("FLORENCE NIGHTINGALE", "İSTANBUL");
         map.put("SIYAMI ERSEK", "İSTANBUL");
         map.put("SİYAMİ ERSEK", "İSTANBUL");
         map.put("GÖZTEPE EĞİTİM ARAŞTIRMA HASTANESİ", "İSTANBUL");
