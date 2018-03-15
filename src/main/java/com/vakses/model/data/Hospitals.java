@@ -23,23 +23,33 @@ public class Hospitals {
         map.put("SIHHIYE NUMUNE HASTANESİ", "ANKARA");
         map.put("SÖĞÜTÖZÜ MEDİCANA HASTANESİ", "ANKARA");
         map.put("SİNCAN LOKMAN HEKİM HASTANESİ", "ANKARA");
+        map.put("UMUTTEPE EĞİTİM VE ARAŞTIRMA HASTANESİ", "ANKARA");
 
         map.put("ULUDAĞ FAKÜLTESİ", "BURSA");
         map.put("ULUDAĞ ÜNİVERSİTESİ", "BURSA");
+        map.put("ULUDAG ÜNİVERSİTESİ", "BURSA");
 
-        map.put("MEHMET AKİF Hastanesi", "İSTANBUL");
+        map.put("MEHMET AKİF HASTANESİ", "İSTANBUL");
         map.put("ÜSKÜDAR ÇAMLICA HASTANESİ", "İSTANBUL");
+        map.put("BAHÇELIEVLER MEDICALPARK HASTANESI", "İSTANBUL");
+        map.put("BAHÇELIEVLER MEDICALPARK HASTANESİ", "İSTANBUL");
         map.put("ÇAPA TIP FAKÜLTESİ", "İSTANBUL");
         map.put("FLORENCE NIGHTINGALE", "İSTANBUL");
         map.put("SIYAMI ERSEK", "İSTANBUL");
         map.put("SİYAMİ ERSEK", "İSTANBUL");
         map.put("GÖZTEPE EĞİTİM ARAŞTIRMA HASTANESİ", "İSTANBUL");
+        map.put("KAVACIK MEDİSTATE HASTANESİ", "İSTANBUL");
+
+        map.put("KAYSERİ EĞİTİM VE ARAŞTIRMA HASTANESİ", "KAYSERİ");
+        map.put("LÜLEBURGAZ ÖZEL MEDİKENT HASTANESİ", "KIRKLARELİ");
+
 
         map.put("DOKUZ EYLÜL", "İZMİR");
+        map.put("EGE ÜNİVERSİTESİ", "İZMİR");
+        map.put("EGE UNIVERSITESI", "İZMİR");
 
         map.put("OMÜ TIP FAKÜLTESİ", "SAMSUN");
         map.put("ON DOKUZ MAYIS ÜNİVERSİTESİ TIP FAKÜLTESİ", "SAMSUN");
-
         map.put("MEDİCAL PARK KARADENİZ HASTANESİ", "TRABZON");
 
         names = Collections.unmodifiableMap(map);
