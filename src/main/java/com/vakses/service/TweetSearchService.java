@@ -1,6 +1,8 @@
 package com.vakses.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
@@ -12,11 +14,13 @@ import java.util.Set;
 /**
  * Created by veraxmedax on 08/03/2018.
  */
+@Slf4j
 @Service
 public class TweetSearchService {
     private Twitter twitter;
     private DonationStoreService tweetParserService;
     private DonationRetweetService donationRetweetService;
+    private static final long TEN_MINUTES_IN_MS = 10 * 60 * 1000;
 
     @Autowired
     public TweetSearchService(Twitter twitter, DonationStoreService tweetParserService, DonationRetweetService donationRetweetService) {
@@ -25,7 +29,9 @@ public class TweetSearchService {
         this.donationRetweetService = donationRetweetService;
     }
 
+    @Scheduled(fixedRate = TEN_MINUTES_IN_MS)
     public void findTweets() {
+        log.info("Tweet search job started..");
         final Set<Tweet> tweetSet = new HashSet<>();
         final Set<Tweet> storedSet = new HashSet<>();
 
@@ -46,7 +52,10 @@ public class TweetSearchService {
             }
         }
 
-        donationRetweetService.retweet(tweetSet);
+        if (storedSet.size() > 0) {
+            log.info("Total of " + storedSet.size() + " new record found, retweeting..");
+            donationRetweetService.retweet(storedSet);
+        }
     }
 
     private SearchParameters generateSearchParameters() {
@@ -61,14 +70,12 @@ public class TweetSearchService {
         bloodGroups.add("0 Rh -");
 
         StringBuilder query = new StringBuilder();
-
         for (String group : bloodGroups) {
             query.append(group);
             if (bloodGroups.iterator().hasNext()) {
                 query.append(" OR ");
             }
         }
-
         query.append(" exclude:replies AND exclude:retweets ");
 
         return new SearchParameters(query.toString()).
