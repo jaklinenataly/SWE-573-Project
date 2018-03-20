@@ -29,6 +29,18 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.social:spring-social-twitter")
+
+    //security
+    compile('org.springframework.security:spring-security-web:4.2.4.RELEASE')
+    compile('org.springframework.security:spring-security-config:4.2.4.RELEASE')
+    compile("org.springframework.security.oauth:spring-security-oauth2")
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile("org.springframework.security:spring-security-jwt")
+
+    //swagger
+    compile("io.springfox:springfox-swagger2:2.6.1")
+    compile("io.springfox:springfox-swagger-ui:2.6.1")
+
     compile('org.projectlombok:lombok:1.16.20')
     compile('org.slf4j:slf4j-api:1.7.25')
     runtime('org.postgresql:postgresql')

@@ -3,6 +3,7 @@ package com.vakses.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
@@ -30,6 +31,7 @@ public class TweetSearchService {
     }
 
     @Scheduled(fixedRate = TEN_MINUTES_IN_MS)
+    @Secured({"ROLE_ADMIN"})
     public void findTweets() {
         log.info("Tweet search job started..");
         final Set<Tweet> tweetSet = new HashSet<>();

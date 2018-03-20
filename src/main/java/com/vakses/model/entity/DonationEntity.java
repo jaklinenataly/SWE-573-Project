@@ -7,12 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by veraxmedax on 08/03/2018.
  */
 @Data
 @Entity
+@Table(name = "donation_requests")
 public class DonationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
