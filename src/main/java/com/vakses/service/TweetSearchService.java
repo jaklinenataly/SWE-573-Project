@@ -31,7 +31,7 @@ public class TweetSearchService {
     }
 
     @Scheduled(fixedRate = TEN_MINUTES_IN_MS)
-    @Secured({"ROLE_ADMIN"})
+//    @Secured({"ADMIN"})
     public void findTweets() {
         log.info("Tweet search job started..");
         final Set<Tweet> tweetSet = new HashSet<>();
