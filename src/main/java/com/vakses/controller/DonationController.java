@@ -36,7 +36,7 @@ public class DonationController {
     @RequestMapping(value = "/requests/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public DonationResource getDonationRequestById(@PathVariable final long id) {
-        return donationStoreService.getAllDonationRequestsById(id);
+        return donationStoreService.getDonationRequestById(id);
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
