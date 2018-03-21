@@ -22,8 +22,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     static final String CLIENT_ID = "blooderHoodApp";
     static final String GRANT_TYPE_PASSWORD = "password";
     static final String GRANT_TYPE_REFRESH_TOKEN = "refresh_token";
-    static final String SCOPE_ADMIN = "ROLE_ADMIN";
-    static final String SCOPE_USER = "ROLE_USER";
+    static final String SCOPE_ADMIN = "ADMIN";
+    static final String SCOPE_USER = "USER";
     static final String RESOURCES_IDS = "web_api";
 
     @Autowired
