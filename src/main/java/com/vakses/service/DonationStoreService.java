@@ -84,7 +84,7 @@ public class DonationStoreService {
         return donationResources;
     }
 
-    public DonationResource getAllDonationRequestsById(long id) {
+    public DonationResource getDonationRequestById(long id) {
         DonationEntity donationEntity = donationRepository.findOne(id);
         return conversionService.convert(donationEntity, DonationResource.class);
     }

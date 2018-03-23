@@ -22,8 +22,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     static final String CLIENT_ID = "blooderHoodApp";
     static final String GRANT_TYPE_PASSWORD = "password";
     static final String GRANT_TYPE_REFRESH_TOKEN = "refresh_token";
-    static final String SCOPE_ADMIN = "ROLE_ADMIN";
-    static final String SCOPE_USER = "ROLE_USER";
+    static final String SCOPE_USER = "USER";
     static final String RESOURCES_IDS = "web_api";
 
     @Autowired
@@ -45,7 +44,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient(CLIENT_ID)
                 .secret(SIGNING_KEY)
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD, GRANT_TYPE_REFRESH_TOKEN)
-                .scopes(SCOPE_ADMIN, SCOPE_USER)
+                .scopes(SCOPE_USER)
                 .resourceIds(RESOURCES_IDS);
     }
 

@@ -41,7 +41,8 @@ public class UserService {
         assertUser(userDto);
 
         Set<String> roles = new HashSet<>();
-        roles.add("USER");
+        roles.add("user.r");
+        roles.add("user.c");
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))

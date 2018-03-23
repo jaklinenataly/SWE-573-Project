@@ -8,6 +8,7 @@ import com.vakses.service.UserService;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,23 +38,23 @@ public class UserController {
     public ResponseEntity<UserResource> register(@Valid @RequestBody UserDto userDto) throws UserExistsException {
         User user = userService.createUser(userDto);
         UserResource userResource = conversionService.convert(user, UserResource.class);
-        return ResponseEntity.ok(userResource);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResource);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('user.r')")
     public ResponseEntity<User> findUserById(@PathVariable("userId") @NotEmpty String userId, Principal principal) {
         return ResponseEntity.ok(userService.findUserById(userId));
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('user.r')")
     public ResponseEntity<List<UserResource>> findAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-    @PreAuthorize("#oauth2.hasAuthority('ADMIN')")
+    @PreAuthorize("#oauth2.hasAuthority('admin.d')")
     public ResponseEntity deleteUser(@PathVariable("userId") String userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
