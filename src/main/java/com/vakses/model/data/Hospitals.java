@@ -15,10 +15,13 @@ public class Hospitals {
 
     static {
         Map<String, String> map = new HashMap<>();
-        map.put("ÇUKUROVA ÜNİVERSİTESİ TIP FAKÜLTESİ", "ADANA");
+        map.put("ÇUKUROVA ÜNİVERSİTESİ", "ADANA");
+        map.put("ÇUKUROVA ÜNIVERSITESI", "ADANA");
 
         map.put("HACETTEPE HASTANESİ", "ANKARA");
-        map.put("Hacettepe ÜNİVERSİTESİ TIP FAKÜLTESİ", "ANKARA");
+        map.put("HACETTEPE HASTANESI", "ANKARA");
+        map.put("HACETTEPE ÜNİVERSİTESİ TIP FAKÜLTESİ", "ANKARA");
+        map.put("HACETTEPE UNIVERSITESI TIP FAKULTESI", "ANKARA");
         map.put("BEŞEVLER GAZİ HASTANESİ", "ANKARA");
         map.put("SIHHIYE NUMUNE HASTANESİ", "ANKARA");
         map.put("SÖĞÜTÖZÜ MEDİCANA HASTANESİ", "ANKARA");
@@ -26,18 +29,19 @@ public class Hospitals {
         map.put("UMUTTEPE EĞİTİM VE ARAŞTIRMA HASTANESİ", "ANKARA");
 
         map.put("ULUDAĞ FAKÜLTESİ", "BURSA");
+        map.put("ULUDAĞ FAKÜLTESI", "BURSA");
         map.put("ULUDAĞ ÜNİVERSİTESİ", "BURSA");
-        map.put("ULUDAG ÜNİVERSİTESİ", "BURSA");
+        map.put("ULUDAĞ ÜNIVERSITESI", "BURSA");
 
         map.put("MEHMET AKİF HASTANESİ", "İSTANBUL");
         map.put("ÜSKÜDAR ÇAMLICA HASTANESİ", "İSTANBUL");
         map.put("BAHÇELIEVLER MEDICALPARK HASTANESI", "İSTANBUL");
         map.put("BAHÇELIEVLER MEDICALPARK HASTANESİ", "İSTANBUL");
-        map.put("ÇAPA TIP FAKÜLTESİ", "İSTANBUL");
-        map.put("FLORENCE NIGHTINGALE", "İSTANBUL");
+        map.put("ÇAPA", "İSTANBUL");
         map.put("SIYAMI ERSEK", "İSTANBUL");
         map.put("SİYAMİ ERSEK", "İSTANBUL");
         map.put("GÖZTEPE EĞİTİM ARAŞTIRMA HASTANESİ", "İSTANBUL");
+        map.put("GÖZTEPE EĞITIM", "İSTANBUL");
         map.put("KAVACIK MEDİSTATE HASTANESİ", "İSTANBUL");
 
         map.put("KAYSERİ EĞİTİM VE ARAŞTIRMA HASTANESİ", "KAYSERİ");

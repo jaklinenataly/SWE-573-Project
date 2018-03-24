@@ -1,5 +1,6 @@
 package com.vakses.service;
 
+import com.vakses.model.entity.DonationEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -9,6 +10,7 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -17,16 +19,19 @@ import java.util.Set;
 @Slf4j
 @Service
 public class TweetSearchService {
+    private static final long TEN_MINUTES_IN_MS = 10 * 60 * 1000;
+
     private Twitter twitter;
     private DonationStoreService tweetParserService;
     private DonationRetweetService donationRetweetService;
-    private static final long TEN_MINUTES_IN_MS = 10 * 60 * 1000;
+    private NotificationService notificationService;
 
     @Autowired
-    public TweetSearchService(Twitter twitter, DonationStoreService tweetParserService, DonationRetweetService donationRetweetService) {
+    public TweetSearchService(Twitter twitter, DonationStoreService tweetParserService, DonationRetweetService donationRetweetService, NotificationService notificationService) {
         this.twitter = twitter;
         this.tweetParserService = tweetParserService;
         this.donationRetweetService = donationRetweetService;
+        this.notificationService = notificationService;
     }
 
     @Scheduled(fixedRate = TEN_MINUTES_IN_MS)
@@ -34,6 +39,7 @@ public class TweetSearchService {
         log.info("Tweet search job started..");
         final Set<Tweet> tweetSet = new HashSet<>();
         final Set<Tweet> storedSet = new HashSet<>();
+        final Set<DonationEntity> donationSet = new HashSet<>();
 
         twitter.searchOperations().search(generateSearchParameters()).getTweets()
                 .stream()
@@ -46,16 +52,24 @@ public class TweetSearchService {
                 });
 
         for (Tweet tweet : tweetSet) {
-            boolean isStored = tweetParserService.parseAndStore(tweet);
-            if (isStored) {
+            DonationEntity storedEntity = tweetParserService.parseAndStore(tweet);
+            if (!Objects.isNull(storedEntity)) {
                 storedSet.add(tweet);
+                donationSet.add(storedEntity);
             }
         }
 
+        shareDonationRequest(storedSet, donationSet);
+    }
+
+    private void shareDonationRequest(Set<Tweet> storedSet, Set<DonationEntity> donationSet) {
         if (storedSet.size() > 0) {
             log.info("Total of " + storedSet.size() + " new record found, retweeting..");
             donationRetweetService.retweet(storedSet);
+            donationSet.forEach(donationEntity -> notificationService.notifySubscribers(donationEntity));
+            return;
         }
+        log.info("There is no new donation request!");
     }
 
     private SearchParameters generateSearchParameters() {
