@@ -26,7 +26,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
-            throw new UserNotFoundException("User with username: " + username + "is not found!");
+            throw new UserNotFoundException("User with username: " + username + " is not found!");
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

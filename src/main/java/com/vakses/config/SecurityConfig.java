@@ -54,10 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                /*.and()
+                .authorizeRequests()
+                    .antMatchers("/**").authenticated()*/
                 .and()
-                //.authorizeRequests()
-                //.antMatchers("/**").authenticated()
-                //.and()
                 .httpBasic();
     }
 
@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui.html",
                 "/webjars/**",
                 "/swagger-resources/configuration/ui")
-        .antMatchers(HttpMethod.POST,"/api/user/")
+        .antMatchers(HttpMethod.POST,"/api/users/")
         .antMatchers(HttpMethod.GET, "/api/donations/**");
     }
 

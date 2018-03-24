@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -16,7 +17,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,7 +39,7 @@ public class User {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
-    @Column(nullable = false, updatable = false,unique = true)
+    @Column(nullable = false, updatable = false, unique = true)
     private String username;
 
     @Column(nullable = false, updatable = false, unique = true)
@@ -44,7 +47,9 @@ public class User {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles",joinColumns = @JoinColumn(name = "id"))
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id"))
     private Set<String> roles;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Subscription> subscriptions = new HashSet<>();
 }

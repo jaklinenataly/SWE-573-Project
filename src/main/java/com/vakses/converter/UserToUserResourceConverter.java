@@ -12,6 +12,7 @@ public class UserToUserResourceConverter implements Converter<User, UserResource
                 .username(source.getUsername())
                 .email(source.getEmail())
                 .roles(source.getRoles())
+                .subscriptions(source.getSubscriptions())
                 .build();
     }
 }

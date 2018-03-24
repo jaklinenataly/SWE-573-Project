@@ -1,5 +1,6 @@
 package com.vakses.model.resource;
 
+import com.vakses.model.entity.Subscription;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,4 +18,5 @@ public class UserResource {
     private String username;
     private String email;
     private Set<String> roles;
+    private Set<Subscription> subscriptions;
 }

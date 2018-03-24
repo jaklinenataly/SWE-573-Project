@@ -34,12 +34,12 @@ public class DonationStoreService {
         this.conversionService = conversionService;
     }
 
-    public boolean parseAndStore(Tweet tweet) {
-        DonationEntity storedEntity = donationRepository.findByTweetId(tweet.getId());
+    public DonationEntity parseAndStore(Tweet tweet) {
+        DonationEntity existingEntity = donationRepository.findByTweetId(tweet.getId());
 
-        if (storedEntity != null) {
+        if (existingEntity != null) {
             log.info("Donation with tweetId: {} is already existed.", tweet.getId());
-            return false;
+            return null;
         }
 
         DonationEntity donationEntity = new DonationEntity();
@@ -66,12 +66,12 @@ public class DonationStoreService {
         if (donationEntity.getCity() != null) {
             donationEntity.setContact(tweet.getUser().getScreenName());
             donationEntity.setTweetId(tweet.getId());
-            donationRepository.save(donationEntity);
+            DonationEntity storedEntity = donationRepository.save(donationEntity);
             log.info("Donation with id: {} and tweet id: {} stored successfully.",
                     donationEntity.getId(), donationEntity.getTweetId());
-            return true;
+            return storedEntity;
         }
-        return false;
+        return null;
     }
 
     public List<DonationResource> getAllDonationRequests() {

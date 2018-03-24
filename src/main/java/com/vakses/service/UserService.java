@@ -6,6 +6,7 @@ import com.vakses.model.dto.UserDto;
 import com.vakses.model.entity.User;
 import com.vakses.model.resource.UserResource;
 import com.vakses.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserService {
     @Autowired
@@ -31,7 +33,9 @@ public class UserService {
         User user = userRepository.findOne(id);
 
         if (user == null) {
-            throw new UserNotFoundException("User with id: " + id + " is not found!");
+            final String errorMessage = "User with id: " + id + " is not found!";
+            log.info(errorMessage);
+            throw new UserNotFoundException(errorMessage);
         }
 
         return user;
@@ -42,12 +46,12 @@ public class UserService {
 
         Set<String> roles = new HashSet<>();
         roles.add("user.r");
-        roles.add("user.c");
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .email(userDto.getEmail())
                 .roles(roles)
+                .subscriptions(new HashSet<>())
                 .build();
         return userRepository.save(user);
     }
