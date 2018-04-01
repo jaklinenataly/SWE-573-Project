@@ -40,14 +40,19 @@ public class TweetSearchService {
         final Set<Tweet> tweetSet = new HashSet<>();
         final Set<Tweet> storedSet = new HashSet<>();
         final Set<DonationEntity> donationSet = new HashSet<>();
+        final Set<String> tweetTextSet = new HashSet<>();
 
         twitter.searchOperations().search(generateSearchParameters()).getTweets()
                 .stream()
                 .forEach(tweet -> {
-                    if (tweet.getRetweetedStatus() == null) {
-                        tweetSet.add(tweet);
-                    } else {
-                        tweetSet.add(tweet.getRetweetedStatus());
+                    if (!tweetTextSet.contains(tweet.getText())) {
+                        if (tweet.getRetweetedStatus() == null) {
+                            tweetSet.add(tweet);
+                            tweetTextSet.add(tweet.getText());
+                        } else {
+                            tweetSet.add(tweet.getRetweetedStatus());
+                            tweetTextSet.add(tweet.getText());
+                        }
                     }
                 });
 

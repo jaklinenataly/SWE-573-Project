@@ -38,7 +38,7 @@ public class UserController {
         this.conversionService = conversionService;
     }
 
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResource> register(@Valid @RequestBody UserDto userDto) throws UserExistsException {
         User user = userService.createUser(userDto);
         UserResource userResource = conversionService.convert(user, UserResource.class);
