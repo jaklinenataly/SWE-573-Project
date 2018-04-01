@@ -31,13 +31,6 @@ public class NotificationSubscriptionController {
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionService.addSubscription(userId, bloodGroupType, location));
     }
 
-    /*@PutMapping("/remove")
-    public ResponseEntity<Boolean> removeSubscription(@RequestParam(value = "userId") final String userId,
-                                                   @RequestParam(value = "type") final String bloodGroupType,
-                                                   @RequestParam(value = "location") final String location) {
-        return ResponseEntity.status(HttpStatus.OK).body(subscriptionService.removeSubscription(userId, bloodGroupType, location));
-    }*/
-
     @PutMapping("/remove/{subscriptionId}")
     public ResponseEntity<Boolean> removeSubscription(@PathVariable final long subscriptionId) {
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionService.removeSubscription(subscriptionId));

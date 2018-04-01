@@ -22,6 +22,7 @@ public class Hospitals {
         map.put("HACETTEPE HASTANESI", "ANKARA");
         map.put("HACETTEPE ÜNİVERSİTESİ TIP FAKÜLTESİ", "ANKARA");
         map.put("HACETTEPE UNIVERSITESI TIP FAKULTESI", "ANKARA");
+        map.put("GAZI HASTANESI", "ANKARA");
         map.put("BEŞEVLER GAZİ HASTANESİ", "ANKARA");
         map.put("SIHHIYE NUMUNE HASTANESİ", "ANKARA");
         map.put("SÖĞÜTÖZÜ MEDİCANA HASTANESİ", "ANKARA");
@@ -34,14 +35,18 @@ public class Hospitals {
         map.put("ULUDAĞ ÜNIVERSITESI", "BURSA");
 
         map.put("MEHMET AKİF HASTANESİ", "İSTANBUL");
+        map.put("MEHMET AKIF ERSOY", "İSTANBUL");
         map.put("ÜSKÜDAR ÇAMLICA HASTANESİ", "İSTANBUL");
         map.put("BAHÇELIEVLER MEDICALPARK HASTANESI", "İSTANBUL");
         map.put("BAHÇELIEVLER MEDICALPARK HASTANESİ", "İSTANBUL");
+        map.put("ÇAPA TIP FAKÜLTESI", "İSTANBUL");
+        map.put("PENDIK BOLGE HASTANESI", "İSTANBUL");
         map.put("ÇAPA", "İSTANBUL");
         map.put("SIYAMI ERSEK", "İSTANBUL");
         map.put("SİYAMİ ERSEK", "İSTANBUL");
         map.put("GÖZTEPE EĞİTİM ARAŞTIRMA HASTANESİ", "İSTANBUL");
         map.put("GÖZTEPE EĞITIM", "İSTANBUL");
+        map.put("GÖZTEPE MEDIKAL PARK HASTANESI", "İSTANBUL");
         map.put("KAVACIK MEDİSTATE HASTANESİ", "İSTANBUL");
 
         map.put("KAYSERİ EĞİTİM VE ARAŞTIRMA HASTANESİ", "KAYSERİ");
@@ -52,6 +57,7 @@ public class Hospitals {
         map.put("EGE ÜNİVERSİTESİ", "İZMİR");
         map.put("EGE UNIVERSITESI", "İZMİR");
 
+        map.put("OMÜ", "SAMSUN");
         map.put("OMÜ TIP FAKÜLTESİ", "SAMSUN");
         map.put("ON DOKUZ MAYIS ÜNİVERSİTESİ TIP FAKÜLTESİ", "SAMSUN");
         map.put("MEDİCAL PARK KARADENİZ HASTANESİ", "TRABZON");
