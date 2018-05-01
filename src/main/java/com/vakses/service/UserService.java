@@ -66,6 +66,14 @@ public class UserService {
         userRepository.delete(userId);
     }
 
+    public String getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("User with username: " + username + " is not found!");
+        }
+        return userRepository.findByUsername(username).getId();
+    }
+
     private void assertUser(final UserDto userDto) throws UserExistsException {
         if (userDto == null) {
             throw new IllegalArgumentException("UserDto cannot be null!");
