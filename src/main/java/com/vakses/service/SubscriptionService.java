@@ -1,15 +1,17 @@
 package com.vakses.service;
 
 import com.vakses.exception.InvalidBloodGroupTypeException;
-import com.vakses.exception.UserNotFoundException;
 import com.vakses.model.data.BloodGroup;
 import com.vakses.model.entity.Subscription;
 import com.vakses.model.entity.User;
+import com.vakses.model.resource.SubscriptionResource;
 import com.vakses.repository.SubscriptionRepository;
-import com.vakses.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.support.ConfigurableConversionService;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * Created by veraxmedax on 23/03/2018.
@@ -18,13 +20,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class SubscriptionService {
 
-    private UserRepository userRepository;
+    private UserService userService;
     private SubscriptionRepository subscriptionRepository;
+    private ConfigurableConversionService conversionService;
 
     @Autowired
-    public SubscriptionService(UserRepository userRepository, SubscriptionRepository subscriptionRepository) {
-        this.userRepository = userRepository;
+    public SubscriptionService(UserService userService, SubscriptionRepository subscriptionRepository, ConfigurableConversionService conversionService) {
+        this.userService = userService;
         this.subscriptionRepository = subscriptionRepository;
+        this.conversionService = conversionService;
     }
 
     public boolean addSubscription(String userId, String bloodGroupType, String location) {
@@ -42,7 +46,7 @@ public class SubscriptionService {
 
         final Subscription subscription = new Subscription(bloodGroupType.toUpperCase(), location.toUpperCase(), user);
         user.getSubscriptions().add(subscription);
-        userRepository.save(user);
+        userService.storeUser(user);
         log.info("User is successfully subscribed to blood group type: {} and location: {}", bloodGroupType, location);
 
         return true;
@@ -67,14 +71,13 @@ public class SubscriptionService {
     }
 
     private User assertUser(String userId) {
-        final User user = userRepository.findById(userId);
+        return userService.findUserById(userId);
+    }
 
-        if (user == null) {
-            final String errorMessage = "Unable to find user with id: " + userId;
-            log.error(errorMessage);
-            throw new UserNotFoundException(errorMessage);
-        }
 
-        return user;
+    public Set<SubscriptionResource> getSubscriptionsByUser(String userId) {
+        User user = assertUser(userId);
+        Set<Subscription> subscriptions = user.getSubscriptions();
+        return conversionService.convert(subscriptions, Set.class);
     }
 }

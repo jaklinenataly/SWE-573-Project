@@ -77,4 +77,8 @@ public class UserService {
             throw new UserExistsException("User with email: " + userDto.getEmail() + " already exists!");
         }
     }
+
+    public void storeUser(User user) {
+        userRepository.save(user);
+    }
 }
