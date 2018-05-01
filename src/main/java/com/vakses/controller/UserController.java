@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -64,6 +65,11 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable("userId") String userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/find", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getUserIdByUsername(@RequestParam("username") String username) {
+        return userService.getUserIdByUsername(username);
     }
 
 }
