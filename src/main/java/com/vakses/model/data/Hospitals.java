@@ -18,11 +18,14 @@ public class Hospitals {
         map.put("ÇUKUROVA ÜNİVERSİTESİ", "ADANA");
         map.put("ÇUKUROVA ÜNIVERSITESI", "ADANA");
 
+        map.put("HACETTEPE", "ANKARA");
         map.put("HACETTEPE HASTANESİ", "ANKARA");
         map.put("HACETTEPE HASTANESI", "ANKARA");
+        map.put("IBNI SINA HASTANES", "ANKARA");
         map.put("HACETTEPE ÜNİVERSİTESİ TIP FAKÜLTESİ", "ANKARA");
         map.put("HACETTEPE UNIVERSITESI TIP FAKULTESI", "ANKARA");
         map.put("GAZI HASTANESI", "ANKARA");
+        map.put("LOKMAN HEKIM HASTANESI", "ANKARA");
         map.put("BEŞEVLER GAZİ HASTANESİ", "ANKARA");
         map.put("SIHHIYE NUMUNE HASTANESİ", "ANKARA");
         map.put("SÖĞÜTÖZÜ MEDİCANA HASTANESİ", "ANKARA");
@@ -34,7 +37,10 @@ public class Hospitals {
         map.put("ULUDAĞ ÜNİVERSİTESİ", "BURSA");
         map.put("ULUDAĞ ÜNIVERSITESI", "BURSA");
 
+        map.put("DENIZLI PAMUKKALE ÜNIVERSITELERI HASTANESI", "DENİZLİ");
+
         map.put("MEHMET AKİF HASTANESİ", "İSTANBUL");
+        map.put("ACIBADEM HALKALI ATAKENT HASTANESI", "İSTANBUL");
         map.put("MEHMET AKIF ERSOY", "İSTANBUL");
         map.put("ÜSKÜDAR ÇAMLICA HASTANESİ", "İSTANBUL");
         map.put("BAHÇELIEVLER MEDICALPARK HASTANESI", "İSTANBUL");
@@ -42,6 +48,8 @@ public class Hospitals {
         map.put("ÇAPA TIP FAKÜLTESI", "İSTANBUL");
         map.put("PENDIK BOLGE HASTANESI", "İSTANBUL");
         map.put("ÇAPA", "İSTANBUL");
+        map.put("SADİ KONUKOĞLU HASTANESİ", "İSTANBUL");
+
         map.put("SIYAMI ERSEK", "İSTANBUL");
         map.put("SİYAMİ ERSEK", "İSTANBUL");
         map.put("GÖZTEPE EĞİTİM ARAŞTIRMA HASTANESİ", "İSTANBUL");
