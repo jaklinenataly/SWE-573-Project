@@ -46,9 +46,9 @@ public class DonationStoreService {
         final String tweetText = tweet.getText().toUpperCase();
 
         // TODO : move into new methods
-        bloodGroup.getTypes().forEach(type -> {
+        bloodGroup.getTypes().forEach((type, value) -> {
             if (tweetText.contains(type)) {
-                donationEntity.setBloodGroup(type);
+                donationEntity.setBloodGroup(value);
                 return;
             }
         });
@@ -97,7 +97,7 @@ public class DonationStoreService {
     }
 
     private void validateDonationDto(DonationDto donationDto) {
-        if (!bloodGroup.getTypes().contains(donationDto.getBloodGroup())) {
+        if (!bloodGroup.getTypes().keySet().contains(donationDto.getBloodGroup())) {
             throw new IllegalArgumentException("Invalid Blood Group Type");
         }
     }

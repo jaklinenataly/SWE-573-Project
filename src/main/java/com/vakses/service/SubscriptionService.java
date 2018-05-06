@@ -63,7 +63,7 @@ public class SubscriptionService {
     }
 
     private void validateType(String bloodGroupType) throws InvalidBloodGroupTypeException {
-        if (!BloodGroup.getTypes().contains(bloodGroupType.toUpperCase())) {
+        if (!BloodGroup.getTypes().keySet().contains(bloodGroupType.toUpperCase())) {
             final String errorMessage = "Blood group type" + bloodGroupType + " is not valid!";
             log.error(errorMessage);
             throw new InvalidBloodGroupTypeException(errorMessage);
