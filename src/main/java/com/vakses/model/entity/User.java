@@ -19,7 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -51,5 +50,5 @@ public class User {
     private Set<String> roles;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Subscription> subscriptions = new HashSet<>();
+    private Set<Subscription> subscriptions;
 }
