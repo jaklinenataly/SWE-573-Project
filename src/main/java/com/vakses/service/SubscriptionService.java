@@ -77,7 +77,6 @@ public class SubscriptionService {
 
     public Set<SubscriptionResource> getSubscriptionsByUser(String userId) {
         User user = assertUser(userId);
-        Set<Subscription> subscriptions = user.getSubscriptions();
-        return conversionService.convert(subscriptions, Set.class);
+        return conversionService.convert(user.getSubscriptions(), Set.class);
     }
 }
