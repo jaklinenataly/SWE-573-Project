@@ -25,9 +25,10 @@ public class DonationStoreService {
     private Hospitals hospitals;
     private DonationRepository donationRepository;
     private ConfigurableConversionService conversionService;
+    private NotificationService notificationService;
 
     @Autowired
-    public DonationStoreService(BloodGroup bloodGroup, Hospitals hospitals, DonationRepository donationRepository, ConfigurableConversionService conversionService) {
+    public DonationStoreService(BloodGroup bloodGroup, Hospitals hospitals, DonationRepository donationRepository, NotificationService notificationService, ConfigurableConversionService conversionService) {
         this.bloodGroup = bloodGroup;
         this.hospitals = hospitals;
         this.donationRepository = donationRepository;
@@ -92,6 +93,7 @@ public class DonationStoreService {
     public DonationResource createDonationRequest(DonationDto donationDto) {
         validateDonationDto(donationDto);
         DonationEntity donationEntity = conversionService.convert(donationDto, DonationEntity.class);
+        notificationService.notifySubscribers(donationEntity);
         DonationEntity storedEntity = donationRepository.save(donationEntity);
         return conversionService.convert(storedEntity, DonationResource.class);
     }
