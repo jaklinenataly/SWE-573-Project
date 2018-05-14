@@ -33,6 +33,7 @@ public class DonationStoreService {
         this.hospitals = hospitals;
         this.donationRepository = donationRepository;
         this.conversionService = conversionService;
+        this.notificationService = notificationService;
     }
 
     public DonationEntity parseAndStore(Tweet tweet) {
@@ -92,6 +93,10 @@ public class DonationStoreService {
 
     public DonationResource createDonationRequest(DonationDto donationDto) {
         validateDonationDto(donationDto);
+        log.info("DonationDto: {}", donationDto.toString());
+        if (conversionService == null) {
+            log.info("Conversion service is null");
+        }
         DonationEntity donationEntity = conversionService.convert(donationDto, DonationEntity.class);
         notificationService.notifySubscribers(donationEntity);
         DonationEntity storedEntity = donationRepository.save(donationEntity);
